@@ -1,5 +1,8 @@
 package io.elkaim.canvas.challenge.canvas;
 
+import io.elkaim.canvas.challenge.canvas.model.Canvas;
+import io.elkaim.canvas.challenge.canvas.model.PointTable;
+
 /**
  * Knows how to handle and update a Canvas Object.
  *
@@ -7,6 +10,9 @@ package io.elkaim.canvas.challenge.canvas;
 public interface CanvasService {
 
     Canvas getCanvas();
-    Canvas applyMask(CanvasMask mask);
+    void setCanvas(Canvas canvas);
+    Canvas addElement(PointTable points, boolean isInFront);
+
+    boolean canvasExist();
 
 }
