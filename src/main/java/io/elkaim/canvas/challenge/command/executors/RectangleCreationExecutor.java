@@ -3,20 +3,23 @@ package io.elkaim.canvas.challenge.command.executors;
 import io.elkaim.canvas.challenge.canvas.CanvasService;
 import io.elkaim.canvas.challenge.canvas.model.PointTable;
 import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
+import io.elkaim.canvas.challenge.command.executors.abstracts.AbstractCanvasDrawerExecutor;
 import io.elkaim.canvas.challenge.command.model.Command;
 import io.elkaim.canvas.challenge.command.model.CommandType;
+import io.elkaim.canvas.challenge.painter.MessagePainter;
+import io.elkaim.canvas.challenge.utils.CoordinatesHelper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RectangleCreationExecutor extends AbstractCanvasExecutor  {
+public class RectangleCreationExecutor extends AbstractCanvasDrawerExecutor {
 
 
     // for now, ignore added
-    private final String COMMAND_BODY_PATTERN = "^(?<x1>\\d+)\\s(?<y1>\\d+)\\s(?<x2>\\d+)\\s(?<y2>\\d+)\\s*$";
+    private final String COMMAND_BODY_PATTERN = "^(?<x1>\\d+)\\s+(?<y1>\\d+)\\s+(?<x2>\\d+)\\s+(?<y2>\\d+)\\s*$";
 
-    public RectangleCreationExecutor(CanvasService canvasService) {
-        super(canvasService);
+    public RectangleCreationExecutor(MessagePainter painter, CanvasService canvasService) {
+        super( painter, canvasService);
     }
 
     @Override
@@ -31,14 +34,15 @@ public class RectangleCreationExecutor extends AbstractCanvasExecutor  {
         }
 
         final Pattern pattern = Pattern.compile(COMMAND_BODY_PATTERN);
-        final Matcher matcher = pattern.matcher(cmd.getBody());
+        final Matcher matcher = pattern.matcher(cmd.getBody().trim());
 
         if (matcher.find()){
             Integer x1 = Integer.parseInt(matcher.group("x1"));
             Integer y1 = Integer.parseInt(matcher.group("y1"));
             Integer x2 = Integer.parseInt(matcher.group("x2"));
             Integer y2 = Integer.parseInt(matcher.group("y2"));
-            noNegativeValue(x1, y1, x2, y2);
+            CoordinatesHelper.assertXCoordinates(x1, x2);
+            CoordinatesHelper.assertYCoordinates(y1, y2);
 
             if(x1.equals(x2) || y1.equals(y2)){
                 throw new MalFormedCommandException(String

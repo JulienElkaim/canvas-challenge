@@ -7,19 +7,20 @@ import java.util.Optional;
 public class CommandFactory {
 
     public static Command build(String userCommand) throws MalFormedCommandException {
-        String[] cmd = userCommand.split(" ", 2);
-        if(cmd.length!= 2){
-            throw new MalFormedCommandException(String
-                    .format("Command %s missing a body", userCommand));
-        }else{
-            Optional<CommandType> optionalCommandType = CommandType.of(cmd[0]);
-            if(optionalCommandType.isEmpty()){
-                throw new MalFormedCommandException(String
-                        .format("Command %s not recognized", cmd[0]));
-            }else{
-                CommandType commandType = optionalCommandType.get();
-                return new Command(commandType, cmd[1]);
-            }
+        if(userCommand.isEmpty()){
+            throw new MalFormedCommandException("Command empty. Type HELP to see all commands.");
         }
+
+        String[] cmd = userCommand.split(" ", 2);
+
+        Optional<CommandType> optionalCommandType = CommandType.of(cmd[0]);
+        if(optionalCommandType.isEmpty()){
+            throw new MalFormedCommandException(String
+                    .format("Command %s not recognized", cmd[0]));
+        }else{
+            CommandType commandType = optionalCommandType.get();
+            return new Command(commandType, cmd.length== 2? cmd[1].trim(): "");
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package io.elkaim.canvas.challenge.canvas.model;
 
 import io.elkaim.canvas.challenge.canvas.CanvasLimitSizeException;
+import io.elkaim.canvas.challenge.utils.CoordinatesHelper;
 import lombok.Getter;
 
 
@@ -39,6 +40,8 @@ public class Canvas extends PointTable {
 
     public void addPointIfAbsent(Integer x, Integer y, Character value) {
         if (!this.points.contains(x, y)) {
+            CoordinatesHelper.assertXCoordinates(x);
+            CoordinatesHelper.assertYCoordinates(y);
             this.addPoint(x, y, value);
         }
     }

@@ -1,13 +1,14 @@
 package io.elkaim.canvas.challenge.command.executors;
 
 import io.elkaim.canvas.challenge.canvas.CanvasService;
-import io.elkaim.canvas.challenge.command.CommandExecutor;
+import io.elkaim.canvas.challenge.command.executors.abstracts.AbstractCanvasDrawerExecutor;
 import io.elkaim.canvas.challenge.command.model.Command;
 import io.elkaim.canvas.challenge.command.model.CommandType;
+import io.elkaim.canvas.challenge.painter.MessagePainter;
 
-public class BulkFillExecutor extends AbstractCanvasExecutor {
-    public BulkFillExecutor(CanvasService canvasService) {
-        super(canvasService);
+public class BulkFillExecutor extends AbstractCanvasDrawerExecutor {
+    public BulkFillExecutor(MessagePainter painter, CanvasService canvasService) {
+        super( painter, canvasService);
     }
 
     @Override

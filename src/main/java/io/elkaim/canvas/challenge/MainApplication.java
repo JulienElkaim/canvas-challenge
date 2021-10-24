@@ -2,8 +2,6 @@ package io.elkaim.canvas.challenge;
 
 import io.elkaim.canvas.challenge.canvas.CanvasService;
 import io.elkaim.canvas.challenge.canvas.CanvasServiceImpl;
-import io.elkaim.canvas.challenge.canvas.model.Canvas;
-import io.elkaim.canvas.challenge.command.CommandExecutor;
 import io.elkaim.canvas.challenge.command.CommandService;
 import io.elkaim.canvas.challenge.command.CommandServiceImpl;
 import io.elkaim.canvas.challenge.command.exceptions.QuitApplicationSignalException;
@@ -12,59 +10,55 @@ import io.elkaim.canvas.challenge.command.model.Command;
 import io.elkaim.canvas.challenge.command.model.CommandFactory;
 import io.elkaim.canvas.challenge.painter.CanvasPainter;
 import io.elkaim.canvas.challenge.painter.CanvasPainterImpl;
-import io.elkaim.canvas.challenge.painter.ErrorPainter;
-import io.elkaim.canvas.challenge.painter.ErrorPainterImpl;
+import io.elkaim.canvas.challenge.painter.MessagePainter;
+import io.elkaim.canvas.challenge.painter.MessagePainterImpl;
+import io.elkaim.canvas.challenge.utils.InputRequestor;
 
-import java.beans.JavaBean;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Objects;
 
 
 public class MainApplication {
 
     public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
         CanvasPainter canvasPainter = new CanvasPainterImpl();
         CanvasService canvasService = new CanvasServiceImpl();
-        ErrorPainter errorPainter = new ErrorPainterImpl();
+        MessagePainter messagePainter = new MessagePainterImpl();
         CommandService commandService = new CommandServiceImpl(List.of(
-                new BulkFillExecutor(canvasService),
-                new RectangleCreationExecutor(canvasService),
-                new CanvasCreationExecutor(canvasService),
-                new LineCreationExecutor(canvasService),
-                new QuitApplicationExecutor()
+                new BulkFillExecutor(messagePainter, canvasService),
+                new RectangleCreationExecutor(messagePainter, canvasService),
+                new CanvasCreationExecutor(messagePainter, canvasService),
+                new LineCreationExecutor(messagePainter, canvasService),
+                new QuitApplicationExecutor(messagePainter)
 
         ));
 
-        while(userStillPresent(sc)){
-            String userCommand = sc.nextLine();
-            // 1 translate user Input as a Command
-            try{
-                Command command = CommandFactory.build(userCommand);
-                commandService.exec(command);
-                canvasPainter.draw(canvasService.getCanvas());
+        InputRequestor inputRequestor = new InputRequestor(System.in, System.out);
 
-            }catch (QuitApplicationSignalException quitApp){
-                System.out.print("You decided to quit. All your drawings will be destroyed ! Are you sure? (y): ");
-                String resp = sc.nextLine();
-                if (resp.equalsIgnoreCase("y")){
-                    System.out.println("You pr");
-                    break;
-                }
-            }catch (Exception e){
-                errorPainter.draw(e);
+        String userCommand;
+        while(!Objects.isNull( userCommand = inputRequestor.promptUserForInput("Enter your command here"))){
+
+            if(userCommand.trim().isEmpty()){
+                continue;
             }
 
-            // 2 Send this command to the good Executor
-            // 3 Executor parse and understand the cmd to modify the canvas
-            // 4 the canvas is drawn by a CanvasDrawer
-            //Here,
-        }
-        System.out.println("You quit our Canvas Application, see you soon !");
-    }
+            try{
+                Command command = CommandFactory.build(userCommand);
+                commandService.execute(command);
+                canvasPainter.draw(canvasService.getCanvas());
 
-    private static boolean userStillPresent(Scanner sc) {
-        System.out.print("Enter your command here: ");
-        return sc.hasNextLine();
+            }catch (QuitApplicationSignalException quitApp) {
+                String resp = inputRequestor.promptUserForInput("All your drawings will be destroyed! Are you sure? (y)");
+                if (resp.equalsIgnoreCase("y")) {
+                    System.out.println("The canvas is destroyed.");
+                    break;
+                }
+            } catch (ErrorMessageException e){
+                messagePainter.draw(e.getMessage());
+            }catch (Exception e){
+                messagePainter.draw(e);
+            }
+        }
+        System.out.println("You quit our Canvas Application. See you soon !");
     }
 }

@@ -1,5 +1,7 @@
 package io.elkaim.canvas.challenge.command.exceptions;
 
-public class NoExecutorFoundException extends RuntimeException {
+import io.elkaim.canvas.challenge.ErrorMessageException;
+
+public class NoExecutorFoundException extends ErrorMessageException {
     public NoExecutorFoundException(String msg){ super(msg);}
 }

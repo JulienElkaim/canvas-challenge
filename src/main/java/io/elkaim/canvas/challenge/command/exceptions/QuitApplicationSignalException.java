@@ -1,4 +1,9 @@
 package io.elkaim.canvas.challenge.command.exceptions;
 
-public class QuitApplicationSignalException extends RuntimeException {
+import io.elkaim.canvas.challenge.ApplicationSignalException;
+
+public class QuitApplicationSignalException extends ApplicationSignalException {
+
+    public QuitApplicationSignalException(){ super();}
+
 }
