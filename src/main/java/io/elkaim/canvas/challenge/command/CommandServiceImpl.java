@@ -22,7 +22,7 @@ public class CommandServiceImpl implements CommandService {
             executorMap.get(command.getType()).execute(command);
         } else {
             throw new NoExecutorFoundException(String
-                    .format("No behavior implemented for commands \"%s\" .",
+                    .format("No behavior implemented for command \"%s\" .",
                             command.getType().getAbbreviate()));
         }
     }

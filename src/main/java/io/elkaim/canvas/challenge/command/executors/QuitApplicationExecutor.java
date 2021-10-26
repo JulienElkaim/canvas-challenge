@@ -1,16 +1,15 @@
 package io.elkaim.canvas.challenge.command.executors;
 
-import io.elkaim.canvas.challenge.command.CommandExecutor;
 import io.elkaim.canvas.challenge.command.exceptions.QuitApplicationSignalException;
-import io.elkaim.canvas.challenge.command.executors.abstracts.AbstractExecutor;
+import io.elkaim.canvas.challenge.command.executors.abstracts.BasicCommandExecutor;
 import io.elkaim.canvas.challenge.command.model.Command;
 import io.elkaim.canvas.challenge.command.model.CommandType;
-import io.elkaim.canvas.challenge.painter.MessagePainter;
+import io.elkaim.canvas.challenge.io.out.MessagePrinter;
 
-public class QuitApplicationExecutor extends AbstractExecutor {
+public class QuitApplicationExecutor extends BasicCommandExecutor {
 
-    public QuitApplicationExecutor(MessagePainter messagePainter) {
-        super(messagePainter);
+    public QuitApplicationExecutor(MessagePrinter messagePrinter) {
+        super(messagePrinter);
     }
 
     @Override
@@ -20,7 +19,7 @@ public class QuitApplicationExecutor extends AbstractExecutor {
 
     @Override
     public void execute(Command cmd) {
-        this.messagePainter.draw("You requested to quit.");
+        this.messagePrinter.print("You requested to quit.");
         throw new QuitApplicationSignalException();
 
     }

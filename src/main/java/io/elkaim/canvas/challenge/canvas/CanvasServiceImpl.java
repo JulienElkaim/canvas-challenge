@@ -1,10 +1,9 @@
 package io.elkaim.canvas.challenge.canvas;
 
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
+import io.elkaim.canvas.challenge.canvas.model.DrawTable;
 import io.elkaim.canvas.challenge.canvas.model.Point;
-import io.elkaim.canvas.challenge.canvas.model.PointTable;
 import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
-import io.elkaim.canvas.challenge.painter.CanvasPainter;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -13,7 +12,7 @@ public class CanvasServiceImpl implements CanvasService {
 
     private Canvas canvas;
 
-    public CanvasServiceImpl(){
+    public CanvasServiceImpl() {
     }
 
     @Override
@@ -29,25 +28,20 @@ public class CanvasServiceImpl implements CanvasService {
     }
 
     @Override
-    public Canvas addElement(PointTable pointTable, boolean isInFront) {
-        Collection<Point> eltPoints = pointTable.getPoints();
-        if (isInFront) {
-            eltPoints.forEach(point -> {
-                this.canvas.addPoint(point.getX(), point.getY(), point.getValue());
-            });
+    public void applyMask(DrawTable drawTable, boolean hasPriority) {
+        Collection<Point> eltPoints = drawTable.getPoints();
+        if (hasPriority) {
+            eltPoints.forEach(point -> this.canvas.addPoint(point));
         } else {
-            eltPoints.forEach(point -> {
-                this.canvas.addPointIfAbsent(point.getX(), point.getY(), point.getValue());
-            });
+            eltPoints.forEach(point -> this.canvas.addPointIfAbsent(point));
         }
 
 
-        return null;
     }
 
     @Override
-    public boolean canvasExist() {
-        return Objects.nonNull(this.canvas);
+    public boolean canvasNotYetCreated() {
+        return !Objects.nonNull(this.canvas);
     }
 
 }

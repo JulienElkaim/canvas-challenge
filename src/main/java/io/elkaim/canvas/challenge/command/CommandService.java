@@ -4,8 +4,9 @@ import io.elkaim.canvas.challenge.command.model.Command;
 
 public interface CommandService {
     /**
-     * Take
-     * @param cmd to process and translate into a CanvasMask
+     * Execute a command from the user.
+     *
+     * @param cmd to process and translate into action.
      */
     void execute(Command cmd);
 }

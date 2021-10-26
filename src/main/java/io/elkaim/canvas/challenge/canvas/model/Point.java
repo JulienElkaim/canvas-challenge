@@ -1,16 +1,17 @@
 package io.elkaim.canvas.challenge.canvas.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+/**
+ * Represent a point in a 2D space (Coordinates + value at these coordinates(
+ */
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
+@SuperBuilder
 @Getter
-public class Point {
-    private Integer x;
-    private Integer y;
+public class Point extends Coordinate {
     private Character value;
 }
