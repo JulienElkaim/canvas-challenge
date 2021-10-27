@@ -11,8 +11,8 @@ import java.util.Arrays;
 
 public abstract class MaskSupplierExecutor extends CanvasRelatedExecutor {
 
-    public MaskSupplierExecutor(MessagePrinter painter, CanvasService canvasService) {
-        super(painter, canvasService);
+    public MaskSupplierExecutor(MessagePrinter printer, CanvasService canvasService) {
+        super(printer, canvasService);
     }
 
     public void checkCanvasExists() {
