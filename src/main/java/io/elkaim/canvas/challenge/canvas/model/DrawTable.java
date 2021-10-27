@@ -2,6 +2,7 @@ package io.elkaim.canvas.challenge.canvas.model;
 
 import com.google.common.collect.Table;
 import com.google.common.collect.TreeBasedTable;
+import io.elkaim.canvas.challenge.utils.CoordinatesUtils;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -22,6 +23,8 @@ public class DrawTable {
     }
 
     public void addPoint(Point point) {
+        CoordinatesUtils.assertXCoordinates(point.getX());
+        CoordinatesUtils.assertYCoordinates(point.getY());
         this.points.put(point.getX(), point.getY(), point.getValue());
     }
 

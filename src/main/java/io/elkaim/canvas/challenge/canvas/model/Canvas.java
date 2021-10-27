@@ -46,8 +46,6 @@ public class Canvas extends DrawTable {
 
     public void addPointIfAbsent(Point point) {
         if (!this.points.contains(point.getX(), point.getY())) {
-            CoordinatesUtils.assertXCoordinates(point.getX());
-            CoordinatesUtils.assertYCoordinates(point.getY());
             this.addPoint(point);
         }
     }

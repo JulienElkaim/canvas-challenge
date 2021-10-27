@@ -28,8 +28,8 @@ public class CanvasServiceImpl implements CanvasService {
     }
 
     @Override
-    public void applyMask(DrawTable drawTable, boolean hasPriority) {
-        Collection<Point> eltPoints = drawTable.getPoints();
+    public void applyMask(DrawTable mask, boolean hasPriority) {
+        Collection<Point> eltPoints = mask.getPoints();
         if (hasPriority) {
             eltPoints.forEach(point -> this.canvas.addPoint(point));
         } else {
