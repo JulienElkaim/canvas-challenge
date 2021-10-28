@@ -43,9 +43,9 @@ public class ApplicationContext {
      */
     private void initializeBeans() {
 
-        CanvasPrinter canvasPrinter = new CanvasPrinterImpl();
-        MessagePrinter messagePrinter = new MessagePrinterImpl();
-        ErrorPrinter errorPrinter = new ErrorPrinterImpl();
+        CanvasPrinter canvasPrinter = new CanvasPrinterImpl(System.out);
+        MessagePrinter messagePrinter = new MessagePrinterImpl(System.out);
+        ErrorPrinter errorPrinter = new ErrorPrinterImpl(System.out);
         OutputService outputService = new OutputServiceImpl(messagePrinter, canvasPrinter, errorPrinter);
         this.beans.put(OutputService.class, outputService);
 

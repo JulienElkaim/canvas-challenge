@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +23,11 @@ class CommandServiceImplTest {
 
     @BeforeEach
     void init(){
-        this.commandService = new CommandServiceImpl(List.of(new QuitApplicationExecutor(new MessagePrinterImpl())));
+        this.commandService = new CommandServiceImpl(List.of(
+                new QuitApplicationExecutor(
+                        new MessagePrinterImpl(
+                                new PrintStream(new ByteArrayOutputStream())
+                        ))));
     }
 
     @Test

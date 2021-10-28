@@ -9,16 +9,16 @@ import java.util.Scanner;
  */
 public class InputServiceImpl implements InputService {
     private final Scanner scanner;
-    private final PrintStream prompter;
+    private final PrintStream outputStream;
 
     public InputServiceImpl(InputStream in, PrintStream out) {
         this.scanner = new Scanner(in);
-        this.prompter = out;
+        this.outputStream = out;
     }
 
     @Override
     public String requestInputLine(String msg) {
-        this.prompter.print("> " + msg + ": ");
+        this.outputStream.print("> " + msg + ": ");
         if (this.scanner.hasNextLine()) {
             return this.scanner.nextLine();
         }

@@ -4,6 +4,7 @@ import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.DrawTable;
 import io.elkaim.canvas.challenge.io.out.CanvasPrinter;
 
+import java.io.PrintStream;
 import java.util.Objects;
 
 /**
@@ -15,6 +16,12 @@ public class CanvasPrinterImpl implements CanvasPrinter {
     private static final String BOTTOM_BORDER_UNIT = "¯";
     private static final String TOP_BORDER_UNIT = "_";
     private static final String SIDE_BORDER_UNIT = "║";
+
+    private final PrintStream printStream;
+
+    public CanvasPrinterImpl(PrintStream printStream){
+        this.printStream = printStream;
+    }
 
     @Override
     public void print(Canvas canvas) {
@@ -28,17 +35,17 @@ public class CanvasPrinterImpl implements CanvasPrinter {
 
     private void printVerticalBorder(Integer width, String borderUnit) {
         String verticalBorder = new String(new char[width + 2]).replace("\0", borderUnit);
-        System.out.println(verticalBorder);
+        this.printStream.println(verticalBorder);
     }
 
     private void printCanvasBody(DrawTable drawablePoints, Integer height, Integer width) {
         for (int y = 1; y <= height; y++) {
-            System.out.print(SIDE_BORDER_UNIT);
+            this.printStream.print(SIDE_BORDER_UNIT);
             for (int x = 1; x <= width; x++) {
-                System.out.print(Objects.requireNonNullElse(
+                this.printStream.print(Objects.requireNonNullElse(
                         drawablePoints.getPointValue(x, y), ' '));
             }
-            System.out.println(SIDE_BORDER_UNIT);
+            this.printStream.println(SIDE_BORDER_UNIT);
         }
     }
 }
