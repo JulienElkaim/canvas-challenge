@@ -73,7 +73,8 @@ public class FillCommandExecutor extends MaskSupplierExecutor {
 
         Character value = canvasReference.getPointValue(point.getX(), point.getY());
 
-        //If this point's value equals the origin point's value and the mask did not already define  a new value at this coordinate
+        //If this point's value equals the origin point's value and
+        // the mask did not already define  a new value at this coordinate
         if (((Objects.isNull(value) && Objects.isNull(originPointValue)) ||
                 (value != null && value.equals(originPointValue))) &&
                 Objects.isNull(mask.getPointValue(point.getX(), point.getY()))) {
