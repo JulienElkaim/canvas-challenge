@@ -43,7 +43,7 @@ class ErrorPrinterImplTest {
     }
 
     @AfterEach
-    void finalized(){
+    void tearDown(){
         System.setErr(this.err);
     }
 

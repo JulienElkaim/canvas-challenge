@@ -9,6 +9,8 @@ import java.util.stream.Stream;
 
 public class HelpCommandExecutor extends BasicCommandExecutor {
 
+    public static final String HELP_INTRODUCTION = "Find bellow the available commands:";
+
     public HelpCommandExecutor(MessagePrinter messagePrinter) {
         super(messagePrinter);
     }
@@ -20,7 +22,7 @@ public class HelpCommandExecutor extends BasicCommandExecutor {
 
     @Override
     public void execute(Command cmd) {
-        this.messagePrinter.print("Find bellow the available commands:");
+        this.messagePrinter.print(HELP_INTRODUCTION);
         Stream.of(CommandType.values())
                 .forEach(commandType -> {
                     this.messagePrinter.print("=====================");

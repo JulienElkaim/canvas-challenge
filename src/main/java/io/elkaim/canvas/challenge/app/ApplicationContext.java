@@ -13,6 +13,7 @@ import io.elkaim.canvas.challenge.io.out.printers.CanvasPrinterImpl;
 import io.elkaim.canvas.challenge.io.out.printers.ErrorPrinterImpl;
 import io.elkaim.canvas.challenge.io.out.printers.MessagePrinterImpl;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +26,8 @@ public class ApplicationContext {
 
     private final Map<Class<?>, Object> beans = Maps.newConcurrentMap();
 
-    public ApplicationContext() {
-        this.initializeBeans();
+    public ApplicationContext(PrintStream printStream, InputStream inputStream) {
+        this.initializeBeans(printStream,inputStream);
     }
 
     /**
@@ -42,8 +43,7 @@ public class ApplicationContext {
      * Simulate DI performed with reflection by frameworks such as Spring.
      * Initialize useful components for application.
      */
-    private void initializeBeans() {
-        PrintStream printStream = System.out;
+    private void initializeBeans(PrintStream printStream, InputStream inputStream) {
         this.beans.put(PrintStream.class, printStream);
 
         CanvasPrinter canvasPrinter = new CanvasPrinterImpl(printStream);
@@ -52,7 +52,7 @@ public class ApplicationContext {
         OutputService outputService = new OutputServiceImpl(messagePrinter, canvasPrinter, errorPrinter);
         this.beans.put(OutputService.class, outputService);
 
-        InputService inputService = new InputServiceImpl(System.in, printStream);
+        InputService inputService = new InputServiceImpl(inputStream, printStream);
         this.beans.put(InputService.class, inputService);
 
 

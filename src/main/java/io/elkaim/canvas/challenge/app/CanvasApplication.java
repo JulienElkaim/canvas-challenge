@@ -17,7 +17,7 @@ import java.util.Objects;
  * Application of Canvas.
  * Allow the user to create a canvas and draw on it.
  */
-public class CanvasApplication {
+public class CanvasApplication implements Runnable {
 
     private final PrintStream out;
     private final InputService inputService;
@@ -61,12 +61,22 @@ public class CanvasApplication {
                 }
 
             } catch (QuitApplicationSignalException quitApp) {
-                String choice = this.inputService.requestInputLine("All your drawings will be destroyed! Are you sure? (y)");
+                StringBuilder request = new StringBuilder();
+                if(this.canvasService.canvasNotYetCreated()) {
+                    request.append("You did not try our application yet. you may create a canvas with the 'C' command, or use HELP to get hints.");
+                }else{
+                    request.append("All your drawings will be destroyed!");
+                }
+                request.append("\n");
+                String choice = this.inputService.requestInputLine(request.append("Are you sure you want to quit? (y)").toString());
                 if (choice.equalsIgnoreCase("y")) {
-                    this.out.println("Ok you will quit. The following canvas is the final result:");
-                    this.outputService.print(this.canvasService.getCanvas());
+                    if(!this.canvasService.canvasNotYetCreated()){
+                        this.out.println("Ok you will quit. The following canvas is the final result:");
+                        this.outputService.print(this.canvasService.getCanvas());
+                    }
                     break;
                 }
+
             } catch (ErrorMessageException e) {
                 this.outputService.print(e.getMessage());
             } catch (Exception e) {
