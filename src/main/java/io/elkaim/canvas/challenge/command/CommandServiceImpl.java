@@ -17,7 +17,7 @@ public class CommandServiceImpl implements CommandService {
     }
 
     @Override
-    public void execute(Command command) {
+    public void dispatch(Command command) {
         if (executorMap.containsKey(command.getType())) {
             executorMap.get(command.getType()).execute(command);
         } else {

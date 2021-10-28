@@ -4,9 +4,9 @@ import io.elkaim.canvas.challenge.command.model.Command;
 
 public interface CommandService {
     /**
-     * Execute a command from the user.
+     * Send the command to the relevant Executor to execute it.
      *
      * @param cmd to process and translate into action.
      */
-    void execute(Command cmd);
+    void dispatch(Command cmd);
 }

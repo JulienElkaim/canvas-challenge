@@ -28,4 +28,6 @@ public interface CanvasService {
      */
     boolean canvasNotYetCreated();
 
+    void updateCanvasSize(int w, int h);
+
 }

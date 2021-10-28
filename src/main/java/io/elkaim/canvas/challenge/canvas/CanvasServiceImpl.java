@@ -1,5 +1,6 @@
 package io.elkaim.canvas.challenge.canvas;
 
+import io.elkaim.canvas.challenge.canvas.exceptions.CanvasSizeLimitException;
 import io.elkaim.canvas.challenge.canvas.exceptions.NoCanvasExistsException;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.DrawTable;
@@ -42,6 +43,12 @@ public class CanvasServiceImpl implements CanvasService {
     @Override
     public boolean canvasNotYetCreated() {
         return !Objects.nonNull(this.canvas);
+    }
+
+    @Override
+    public void updateCanvasSize(int w, int h) {
+        this.getCanvas().setWidth(w);
+        this.getCanvas().setHeight(h);
     }
 
 }

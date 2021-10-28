@@ -29,8 +29,7 @@ public class CanvasCommandExecutor extends CanvasRelatedExecutor {
         if (this.canvasService.canvasNotYetCreated()) {
             this.canvasService.setCanvas(new Canvas(width, height));
         } else {
-            this.canvasService.getCanvas().setHeight(height);
-            this.canvasService.getCanvas().setWidth(width);
+            this.canvasService.updateCanvasSize(width, height);
         }
     }
 }

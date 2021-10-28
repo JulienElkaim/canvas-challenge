@@ -53,7 +53,7 @@ public class CanvasApplication implements Runnable {
 
             try {
                 Command command = CommandFactory.build(userCommand);
-                this.commandService.execute(command);
+                this.commandService.dispatch(command);
 
                 if (command.getType().isRedrawRequired()) {
                     this.outputService.print(this.canvasService.getCanvas());

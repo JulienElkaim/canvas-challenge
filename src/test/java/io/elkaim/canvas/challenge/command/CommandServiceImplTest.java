@@ -30,12 +30,12 @@ class CommandServiceImplTest {
     @Test
     void should_execute_throw_when_no_impl_for_cmd_type() {
         Command cmd = new Command(CommandType.HELP, "");
-        Assertions.assertThrows(NoExecutorFoundException.class, () -> this.commandService.execute(cmd));
+        Assertions.assertThrows(NoExecutorFoundException.class, () -> this.commandService.dispatch(cmd));
     }
 
     @Test
     void should_execute_dispatch_to_relevant_executor_when_available() {
         Command cmd = new Command(CommandType.QUIT, "");
-        Assertions.assertThrows(QuitApplicationSignalException.class, () -> this.commandService.execute(cmd));
+        Assertions.assertThrows(QuitApplicationSignalException.class, () -> this.commandService.dispatch(cmd));
     }
 }
