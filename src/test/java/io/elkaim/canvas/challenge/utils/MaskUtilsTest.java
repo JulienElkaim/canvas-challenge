@@ -4,12 +4,6 @@ import io.elkaim.canvas.challenge.canvas.model.DrawTable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class MaskUtilsTest {
 
     @Test
@@ -19,10 +13,10 @@ class MaskUtilsTest {
         int x2 = 15;
         DrawTable mask = new DrawTable();
         MaskUtils.drawHorizontal(mask, y, x1, x2, 'r');
-        Assertions.assertNotNull(mask.getPointValue(x1 + (x2-x1)/2, y));
-        mask.getPoints().forEach((point)->
-            Assertions.assertTrue(point.getX() >= x1 && point.getX() <= x2 && point.getY().equals(y),
-                    String.format("Point (%s,%s) not expected", point.getX(), point.getY()))
+        Assertions.assertNotNull(mask.getPointValue(x1 + (x2 - x1) / 2, y));
+        mask.getPoints().forEach((point) ->
+                Assertions.assertTrue(point.getX() >= x1 && point.getX() <= x2 && point.getY().equals(y),
+                        String.format("Point (%s,%s) not expected", point.getX(), point.getY()))
         );
     }
 
@@ -33,8 +27,8 @@ class MaskUtilsTest {
         int y2 = 15;
         DrawTable mask = new DrawTable();
         MaskUtils.drawVertical(mask, x, y1, y2, 'r');
-        Assertions.assertNotNull(mask.getPointValue(x,y1 + (y2-y1)/2));
-        mask.getPoints().forEach((point)->
+        Assertions.assertNotNull(mask.getPointValue(x, y1 + (y2 - y1) / 2));
+        mask.getPoints().forEach((point) ->
                 Assertions.assertTrue(point.getY() >= y1 && point.getY() <= y2 && point.getX().equals(x),
                         String.format("Point (%s,%s) not expected", point.getX(), point.getY()))
         );

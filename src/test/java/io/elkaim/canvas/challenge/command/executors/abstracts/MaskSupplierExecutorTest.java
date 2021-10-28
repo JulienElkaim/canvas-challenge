@@ -4,19 +4,14 @@ import io.elkaim.canvas.challenge.canvas.CanvasService;
 import io.elkaim.canvas.challenge.canvas.exceptions.NoCanvasExistsException;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.Point;
-import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
 import io.elkaim.canvas.challenge.io.out.MessagePrinter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Answers;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class MaskSupplierExecutorTest {
@@ -32,23 +27,24 @@ class MaskSupplierExecutorTest {
 
 
     @BeforeEach
-    void init(){
+    void init() {
         this.sut = Mockito.mock(MaskSupplierExecutor.class, Mockito.withSettings()
                 .useConstructor(this.printer, this.canvasService)
                 .defaultAnswer(Mockito.CALLS_REAL_METHODS));
 
-        this.canvas = new Canvas(40,5);
+        this.canvas = new Canvas(40, 5);
     }
+
     @Test
     void should_checkCanvasExists_throw_If_no_canvas() {
         Mockito.when(this.canvasService.canvasNotYetCreated()).thenReturn(true);
-        Assertions.assertThrows(NoCanvasExistsException.class,()-> this.sut.checkCanvasExists());
+        Assertions.assertThrows(NoCanvasExistsException.class, () -> this.sut.checkCanvasExists());
     }
 
     @Test
     void should_checkCanvasExists_pass_If_canvas_exist() {
         Mockito.when(this.canvasService.canvasNotYetCreated()).thenReturn(false);
-        Assertions.assertDoesNotThrow(()-> this.sut.checkCanvasExists());
+        Assertions.assertDoesNotThrow(() -> this.sut.checkCanvasExists());
 
     }
 
@@ -65,8 +61,8 @@ class MaskSupplierExecutorTest {
                 .y(5)
                 .value('x')
                 .build();
-        this.sut.isOutsideCanvas(p1,p2);
-        Mockito.verify(this.printer,Mockito.atLeastOnce()).print(Mockito.anyString());
+        this.sut.isOutsideCanvas(p1, p2);
+        Mockito.verify(this.printer, Mockito.atLeastOnce()).print(Mockito.anyString());
 
     }
 
@@ -83,8 +79,8 @@ class MaskSupplierExecutorTest {
                 .y(5)
                 .value('x')
                 .build();
-        this.sut.isOutsideCanvas(p1,p2);
-        Mockito.verify(this.printer,Mockito.never()).print(Mockito.anyString());
+        this.sut.isOutsideCanvas(p1, p2);
+        Mockito.verify(this.printer, Mockito.never()).print(Mockito.anyString());
 
 
     }

@@ -3,7 +3,6 @@ package io.elkaim.canvas.challenge.io.out.printers;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.Point;
 import io.elkaim.canvas.challenge.io.out.CanvasPrinter;
-import io.elkaim.canvas.challenge.io.out.MessagePrinter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,18 +10,15 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class CanvasPrinterImplTest {
 
     private CanvasPrinter sut;
     private ByteArrayOutputStream outputStream;
 
     @BeforeEach
-    void init(){
-        this.outputStream= new ByteArrayOutputStream();
+    void init() {
+        this.outputStream = new ByteArrayOutputStream();
         this.sut = new CanvasPrinterImpl(new PrintStream(outputStream));
-
 
 
     }

@@ -2,7 +2,6 @@ package io.elkaim.canvas.challenge.integration;
 
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.Point;
-import io.elkaim.canvas.challenge.command.executors.HelpCommandExecutor;
 import io.elkaim.canvas.challenge.integration.utils.UserInputChain;
 import io.elkaim.canvas.challenge.io.out.printers.CanvasPrinterImpl;
 import org.junit.jupiter.api.Assertions;

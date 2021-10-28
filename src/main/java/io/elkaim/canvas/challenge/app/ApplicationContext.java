@@ -27,7 +27,7 @@ public class ApplicationContext {
     private final Map<Class<?>, Object> beans = Maps.newConcurrentMap();
 
     public ApplicationContext(PrintStream printStream, InputStream inputStream) {
-        this.initializeBeans(printStream,inputStream);
+        this.initializeBeans(printStream, inputStream);
     }
 
     /**

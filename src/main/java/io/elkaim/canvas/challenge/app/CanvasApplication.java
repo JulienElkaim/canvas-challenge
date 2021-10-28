@@ -9,7 +9,6 @@ import io.elkaim.canvas.challenge.command.model.CommandFactory;
 import io.elkaim.canvas.challenge.io.in.InputService;
 import io.elkaim.canvas.challenge.io.out.OutputService;
 
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Objects;
 
@@ -62,15 +61,15 @@ public class CanvasApplication implements Runnable {
 
             } catch (QuitApplicationSignalException quitApp) {
                 StringBuilder request = new StringBuilder();
-                if(this.canvasService.canvasNotYetCreated()) {
+                if (this.canvasService.canvasNotYetCreated()) {
                     request.append("You did not try our application yet. you may create a canvas with the 'C' command, or use HELP to get hints.");
-                }else{
+                } else {
                     request.append("All your drawings will be destroyed!");
                 }
                 request.append("\n");
                 String choice = this.inputService.requestInputLine(request.append("Are you sure you want to quit? (y)").toString());
                 if (choice.equalsIgnoreCase("y")) {
-                    if(!this.canvasService.canvasNotYetCreated()){
+                    if (!this.canvasService.canvasNotYetCreated()) {
                         this.out.println("Ok you will quit. The following canvas is the final result:");
                         this.outputService.print(this.canvasService.getCanvas());
                     }

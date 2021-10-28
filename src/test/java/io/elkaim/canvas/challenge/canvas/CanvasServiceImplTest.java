@@ -4,12 +4,9 @@ import io.elkaim.canvas.challenge.canvas.exceptions.NoCanvasExistsException;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.DrawTable;
 import io.elkaim.canvas.challenge.canvas.model.Point;
-import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CanvasServiceImplTest {
 
@@ -48,7 +45,7 @@ class CanvasServiceImplTest {
         Assertions.assertEquals(0, this.canvas.getPoints().size(),
                 "Canvas should have no points beore applyMask");
         this.sut.setCanvas(this.canvas);
-        this.sut.applyMask(mask,true);
+        this.sut.applyMask(mask, true);
         Assertions.assertEquals(1, this.canvas.getPoints().size(),
                 "Canvas should now have points from mask");
         Assertions.assertSame(pMask.getValue(),

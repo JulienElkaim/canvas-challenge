@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  * Printer able to print a Canvas object.
- * It interprets the Canvas' PointTable to make the ORIGIN point on the upper left corner.
+ * It interprets the Canvas' PointTable to make the ORIGIN point in the upper left corner.
  */
 public class CanvasPrinterImpl implements CanvasPrinter {
 
@@ -19,7 +19,7 @@ public class CanvasPrinterImpl implements CanvasPrinter {
 
     private final PrintStream printStream;
 
-    public CanvasPrinterImpl(PrintStream printStream){
+    public CanvasPrinterImpl(PrintStream printStream) {
         this.printStream = printStream;
     }
 

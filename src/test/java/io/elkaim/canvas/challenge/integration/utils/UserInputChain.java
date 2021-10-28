@@ -13,23 +13,23 @@ public class UserInputChain {
         this.inputs = new ArrayList<>();
     }
 
-    public static UserInputChain of(String... inputs){
+    public static UserInputChain of(String... inputs) {
         UserInputChain userInputChain = new UserInputChain();
         Arrays.stream(inputs).forEach(userInputChain::then);
         return userInputChain;
     }
 
-    public UserInputChain then(String input){
+    public UserInputChain then(String input) {
         this.inputs.add(input);
         return this;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "\n".concat(String.join("\n", this.inputs));
     }
 
-    public InputStream build(){
+    public InputStream build() {
         return new ByteArrayInputStream(this.toString().getBytes());
     }
 }

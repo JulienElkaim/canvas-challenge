@@ -3,20 +3,16 @@ package io.elkaim.canvas.challenge.command.executors;
 import io.elkaim.canvas.challenge.canvas.CanvasService;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
-import io.elkaim.canvas.challenge.command.executors.abstracts.MaskSupplierExecutor;
 import io.elkaim.canvas.challenge.command.model.Command;
 import io.elkaim.canvas.challenge.command.model.CommandType;
 import io.elkaim.canvas.challenge.io.out.MessagePrinter;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class CanvasCommandExecutorTest {
@@ -33,13 +29,13 @@ class CanvasCommandExecutorTest {
 
     @Test
     void should_execute_on_bad_cmd_throw_error() {
-        Command missingHeight = new Command(CommandType.CREATE_CANVAS,"50");
-        Assertions.assertThrows(MalFormedCommandException.class, ()-> this.sut.execute(missingHeight));
+        Command missingHeight = new Command(CommandType.CREATE_CANVAS, "50");
+        Assertions.assertThrows(MalFormedCommandException.class, () -> this.sut.execute(missingHeight));
     }
 
     @Test
     void should_execute_on_good_cmd_canvas_exist_replace_width_height() {
-        Command cmd = new Command(CommandType.CREATE_CANVAS,"50 10");
+        Command cmd = new Command(CommandType.CREATE_CANVAS, "50 10");
 
         Canvas canvas = Mockito.mock(Canvas.class, Mockito.withSettings()
                 .useConstructor(40, 5)
@@ -58,7 +54,7 @@ class CanvasCommandExecutorTest {
 
     @Test
     void should_execute_on_good_cmd_no_canvas_create_one() {
-        Command cmd = new Command(CommandType.CREATE_CANVAS,"50 10");
+        Command cmd = new Command(CommandType.CREATE_CANVAS, "50 10");
 
         Mockito.when(this.canvasService.canvasNotYetCreated()).thenReturn(true);
 

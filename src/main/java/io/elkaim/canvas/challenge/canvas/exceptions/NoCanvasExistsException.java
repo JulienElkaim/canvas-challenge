@@ -1,8 +1,6 @@
 package io.elkaim.canvas.challenge.canvas.exceptions;
 
 import io.elkaim.canvas.challenge.app.exceptions.ErrorMessageException;
-import io.elkaim.canvas.challenge.canvas.model.Canvas;
-import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
 
 /**
  * Errors about Canvas' size limits.

@@ -23,17 +23,18 @@ public abstract class ApplicationLevelIntegration {
 
     }
 
-    protected void runFullAppScenario(InputStream in, OutputStream out){
-        this.runFullAppScenario( in, out, 10);
+    protected void runFullAppScenario(InputStream in, OutputStream out) {
+        this.runFullAppScenario(in, out, 10);
 
     }
-    protected void runFullAppScenario(InputStream in, OutputStream out, int timeOutSeconds){
+
+    protected void runFullAppScenario(InputStream in, OutputStream out, int timeOutSeconds) {
         PrintStream printStream = new PrintStream(out);
         ApplicationContext applicationContext = new ApplicationContext(printStream, in);
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<?> future = executor.submit(new CanvasApplication(applicationContext));
-        Assertions.assertDoesNotThrow(()-> future.get(timeOutSeconds, TimeUnit.SECONDS),
+        Assertions.assertDoesNotThrow(() -> future.get(timeOutSeconds, TimeUnit.SECONDS),
                 String.format("Current state of outputStream is: \n%s", out));
 
     }

@@ -10,9 +10,10 @@ class CanvasTest {
     private Canvas sut;
 
     @BeforeEach
-    public void init(){
-        this.sut = new Canvas(40,5);
+    public void init() {
+        this.sut = new Canvas(40, 5);
     }
+
     @Test
     void should_addPointIfAbsent_add_when_coordinates_not_yet_set() {
         Point p1 = Point.builder()
@@ -71,35 +72,35 @@ class CanvasTest {
                 .y(Canvas.MAX_HEIGHT * 10)
                 .value('x')
                 .build();
-        Assertions.assertThrows(MalFormedCommandException.class,()->{
+        Assertions.assertThrows(MalFormedCommandException.class, () -> {
             this.sut.addPointIfAbsent(pOutOfBounds1);
-        },"Out of upper-bound Y, should throw an error");
+        }, "Out of upper-bound Y, should throw an error");
         Point pOutOfBounds2 = Point.builder()
                 .x(Canvas.MAX_WIDTH * 10)
                 .y(3)
                 .value('x')
                 .build();
-        Assertions.assertThrows(MalFormedCommandException.class,()->{
+        Assertions.assertThrows(MalFormedCommandException.class, () -> {
             this.sut.addPointIfAbsent(pOutOfBounds2);
-        },"Out of upper-bound X, should throw an error");
+        }, "Out of upper-bound X, should throw an error");
 
         Point pOutOfBounds3 = Point.builder()
                 .x(-1)
                 .y(3)
                 .value('x')
                 .build();
-        Assertions.assertThrows(MalFormedCommandException.class,()->{
+        Assertions.assertThrows(MalFormedCommandException.class, () -> {
             this.sut.addPointIfAbsent(pOutOfBounds3);
-        },"X value can't be negative, should throw an error");
+        }, "X value can't be negative, should throw an error");
 
         Point pOutOfBounds4 = Point.builder()
                 .x(3)
                 .y(-1)
                 .value('x')
                 .build();
-        Assertions.assertThrows(MalFormedCommandException.class,()->{
+        Assertions.assertThrows(MalFormedCommandException.class, () -> {
             this.sut.addPointIfAbsent(pOutOfBounds4);
-        },"Y value can't be negative, should throw an error");
+        }, "Y value can't be negative, should throw an error");
 
         Assertions.assertEquals(0, this.sut.getPoints().size(),
                 "Points should not have been added to the canvas.");

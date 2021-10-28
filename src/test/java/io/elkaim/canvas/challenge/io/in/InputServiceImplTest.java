@@ -1,21 +1,17 @@
 package io.elkaim.canvas.challenge.io.in;
 
-import io.elkaim.canvas.challenge.io.out.MessagePrinter;
-import io.elkaim.canvas.challenge.io.out.printers.MessagePrinterImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 class InputServiceImplTest {
 
@@ -23,12 +19,13 @@ class InputServiceImplTest {
     private ByteArrayOutputStream outputStream;
     private InputStream inputStream;
     private String userReply;
+
     @BeforeEach
-    void init(){
+    void init() {
         this.userReply = "Ok, I do that!";
         this.inputStream = new ByteArrayInputStream(userReply.getBytes());
-        this.outputStream= new ByteArrayOutputStream();
-        this.sut = new InputServiceImpl(inputStream,new PrintStream(outputStream));
+        this.outputStream = new ByteArrayOutputStream();
+        this.sut = new InputServiceImpl(inputStream, new PrintStream(outputStream));
     }
 
     @Test

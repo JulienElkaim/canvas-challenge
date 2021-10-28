@@ -12,7 +12,7 @@ public class MessagePrinterImpl implements MessagePrinter {
 
     private final PrintStream printStream;
 
-    public MessagePrinterImpl(PrintStream printStream){
+    public MessagePrinterImpl(PrintStream printStream) {
         this.printStream = printStream;
     }
 

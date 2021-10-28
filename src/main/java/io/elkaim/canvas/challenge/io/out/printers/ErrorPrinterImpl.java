@@ -12,9 +12,10 @@ public class ErrorPrinterImpl implements ErrorPrinter {
 
     private final PrintStream printStream;
 
-    public ErrorPrinterImpl(PrintStream printStream){
+    public ErrorPrinterImpl(PrintStream printStream) {
         this.printStream = printStream;
     }
+
     @Override
     public void print(Exception err) {
         this.printStream.println("Unexpected error occurred: " + err.getMessage());

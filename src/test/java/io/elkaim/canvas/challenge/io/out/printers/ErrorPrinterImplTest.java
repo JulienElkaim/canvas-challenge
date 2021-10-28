@@ -1,14 +1,14 @@
 package io.elkaim.canvas.challenge.io.out.printers;
 
 import io.elkaim.canvas.challenge.io.out.ErrorPrinter;
-import io.elkaim.canvas.challenge.io.out.MessagePrinter;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ErrorPrinterImplTest {
 
@@ -17,8 +17,8 @@ class ErrorPrinterImplTest {
     private PrintStream err;
 
     @BeforeEach
-    void init(){
-        this.outputStream= new ByteArrayOutputStream();
+    void init() {
+        this.outputStream = new ByteArrayOutputStream();
         this.sut = new ErrorPrinterImpl(new PrintStream(outputStream));
         this.err = System.err;
 
@@ -38,12 +38,12 @@ class ErrorPrinterImplTest {
         this.sut.print(exception);
 
         String head = "Unexpected error occurred: ";
-        Assertions.assertEquals(head+helloWorld+"\n", this.outputStream.toString());
+        Assertions.assertEquals(head + helloWorld + "\n", this.outputStream.toString());
         Assertions.assertFalse(errOutputStream.toString().isEmpty());
     }
 
     @AfterEach
-    void tearDown(){
+    void tearDown() {
         System.setErr(this.err);
     }
 

@@ -1,7 +1,6 @@
 package io.elkaim.canvas.challenge.canvas.model;
 
 import io.elkaim.canvas.challenge.canvas.exceptions.CanvasSizeLimitException;
-import io.elkaim.canvas.challenge.utils.CoordinatesUtils;
 import lombok.Getter;
 
 
