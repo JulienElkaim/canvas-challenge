@@ -1,6 +1,7 @@
 package io.elkaim.canvas.challenge.command.executors;
 
 import io.elkaim.canvas.challenge.canvas.CanvasService;
+import io.elkaim.canvas.challenge.canvas.CanvasServiceImpl;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
 import io.elkaim.canvas.challenge.command.model.Command;
@@ -9,6 +10,7 @@ import io.elkaim.canvas.challenge.io.out.MessagePrinter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Answers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -18,7 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class CanvasCommandExecutorTest {
 
     @Mock
-    private CanvasService canvasService;
+    private CanvasServiceImpl canvasService;
 
     @Mock
     private MessagePrinter printer;
@@ -42,6 +44,7 @@ class CanvasCommandExecutorTest {
                 .defaultAnswer(Mockito.CALLS_REAL_METHODS));
 
         Mockito.when(this.canvasService.getCanvas()).thenReturn(canvas);
+        Mockito.doCallRealMethod().when(this.canvasService).updateCanvasSize(Mockito.anyInt(),Mockito.anyInt());
         Mockito.when(this.canvasService.canvasNotYetCreated()).thenReturn(false);
 
         this.sut.execute(cmd);
