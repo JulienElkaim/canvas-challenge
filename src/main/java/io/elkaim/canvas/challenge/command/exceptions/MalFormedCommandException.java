@@ -7,8 +7,6 @@ import io.elkaim.canvas.challenge.app.exceptions.ErrorMessageException;
  */
 public class MalFormedCommandException extends ErrorMessageException {
 
-    public static final MalFormedCommandException NO_CANVAS = new MalFormedCommandException("Please create a canvas before drawing anything.");
-
     public MalFormedCommandException(String msg) {
         super(msg);
     }

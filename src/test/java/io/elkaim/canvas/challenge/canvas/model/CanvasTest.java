@@ -23,7 +23,7 @@ class CanvasTest {
         Assertions.assertEquals(0, this.sut.getPoints().size(),
                 "Canvas should be totally empty at first.");
         this.sut.addPointIfAbsent(p1);
-        Assertions.assertEquals(2, this.sut.getPoints().size(),
+        Assertions.assertEquals(1, this.sut.getPoints().size(),
                 "Canvas should now have 1 point.");
         Assertions.assertEquals('t', this.sut.getPointValue(p1.getX(), p1.getY()),
                 "Point value should be " + p1.getValue());

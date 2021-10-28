@@ -1,9 +1,9 @@
 package io.elkaim.canvas.challenge.command.executors.abstracts;
 
 import io.elkaim.canvas.challenge.canvas.CanvasService;
+import io.elkaim.canvas.challenge.canvas.exceptions.NoCanvasExistsException;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.Coordinate;
-import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
 import io.elkaim.canvas.challenge.io.out.MessagePrinter;
 import io.elkaim.canvas.challenge.utils.CoordinatesUtils;
 
@@ -17,7 +17,7 @@ public abstract class MaskSupplierExecutor extends CanvasRelatedExecutor {
 
     public void checkCanvasExists() {
         if (canvasService.canvasNotYetCreated()) {
-            throw MalFormedCommandException.NO_CANVAS;
+            throw new NoCanvasExistsException();
         }
     }
 

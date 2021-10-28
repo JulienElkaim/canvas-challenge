@@ -1,5 +1,6 @@
 package io.elkaim.canvas.challenge.canvas;
 
+import io.elkaim.canvas.challenge.canvas.exceptions.NoCanvasExistsException;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.DrawTable;
 import io.elkaim.canvas.challenge.canvas.model.Point;
@@ -24,7 +25,7 @@ class CanvasServiceImplTest {
 
     @Test
     void should_getCanvas_throw_if_no_canvas() {
-        Assertions.assertThrows(MalFormedCommandException.class,
+        Assertions.assertThrows(NoCanvasExistsException.class,
                 () -> this.sut.getCanvas());
     }
 

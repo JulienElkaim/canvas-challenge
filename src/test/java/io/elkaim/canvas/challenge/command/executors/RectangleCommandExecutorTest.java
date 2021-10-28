@@ -1,6 +1,7 @@
 package io.elkaim.canvas.challenge.command.executors;
 
 import io.elkaim.canvas.challenge.canvas.CanvasServiceImpl;
+import io.elkaim.canvas.challenge.canvas.exceptions.NoCanvasExistsException;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.Point;
 import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
@@ -42,7 +43,7 @@ class RectangleCommandExecutorTest {
     @Test
     void should_execute_throw_if_no_canvas() {
         Command normal = new Command(CommandType.RECTANGLE,"30 2 40 3 r");
-        Assertions.assertThrows(MalFormedCommandException.class, ()-> this.sut.execute(normal));
+        Assertions.assertThrows(NoCanvasExistsException.class, ()-> this.sut.execute(normal));
     }
 
 

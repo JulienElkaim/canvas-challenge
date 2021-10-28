@@ -1,6 +1,7 @@
 package io.elkaim.canvas.challenge.command.executors.abstracts;
 
 import io.elkaim.canvas.challenge.canvas.CanvasService;
+import io.elkaim.canvas.challenge.canvas.exceptions.NoCanvasExistsException;
 import io.elkaim.canvas.challenge.canvas.model.Canvas;
 import io.elkaim.canvas.challenge.canvas.model.Point;
 import io.elkaim.canvas.challenge.command.exceptions.MalFormedCommandException;
@@ -41,7 +42,7 @@ class MaskSupplierExecutorTest {
     @Test
     void should_checkCanvasExists_throw_If_no_canvas() {
         Mockito.when(this.canvasService.canvasNotYetCreated()).thenReturn(true);
-        Assertions.assertThrows(MalFormedCommandException.class,()-> this.sut.checkCanvasExists());
+        Assertions.assertThrows(NoCanvasExistsException.class,()-> this.sut.checkCanvasExists());
     }
 
     @Test
