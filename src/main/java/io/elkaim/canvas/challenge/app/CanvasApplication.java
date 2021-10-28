@@ -9,6 +9,8 @@ import io.elkaim.canvas.challenge.command.model.CommandFactory;
 import io.elkaim.canvas.challenge.io.in.InputService;
 import io.elkaim.canvas.challenge.io.out.OutputService;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Objects;
 
 /**
@@ -17,6 +19,7 @@ import java.util.Objects;
  */
 public class CanvasApplication {
 
+    private final PrintStream out;
     private final InputService inputService;
     private final OutputService outputService;
 
@@ -29,9 +32,11 @@ public class CanvasApplication {
         this.ctx = context;
 
         this.commandService = this.ctx.getBean(CommandService.class);
-        this.inputService = this.ctx.getBean(InputService.class);
-        this.outputService = this.ctx.getBean(OutputService.class);
         this.canvasService = this.ctx.getBean(CanvasService.class);
+
+        this.out = this.ctx.getBean(PrintStream.class);
+        this.outputService = this.ctx.getBean(OutputService.class);
+        this.inputService = this.ctx.getBean(InputService.class);
     }
 
     /**
@@ -58,7 +63,7 @@ public class CanvasApplication {
             } catch (QuitApplicationSignalException quitApp) {
                 String choice = this.inputService.requestInputLine("All your drawings will be destroyed! Are you sure? (y)");
                 if (choice.equalsIgnoreCase("y")) {
-                    System.out.println("Ok you will quit. The following canvas is the final result:");
+                    this.out.println("Ok you will quit. The following canvas is the final result:");
                     this.outputService.print(this.canvasService.getCanvas());
                     break;
                 }
@@ -68,6 +73,6 @@ public class CanvasApplication {
                 this.outputService.print(e);
             }
         }
-        System.out.println("You quit our Canvas Application. See you soon !");
+        this.out.println("You quit our Canvas Application. See you soon !");
     }
 }

@@ -13,6 +13,7 @@ import io.elkaim.canvas.challenge.io.out.printers.CanvasPrinterImpl;
 import io.elkaim.canvas.challenge.io.out.printers.ErrorPrinterImpl;
 import io.elkaim.canvas.challenge.io.out.printers.MessagePrinterImpl;
 
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
 
@@ -42,14 +43,16 @@ public class ApplicationContext {
      * Initialize useful components for application.
      */
     private void initializeBeans() {
+        PrintStream printStream = System.out;
+        this.beans.put(PrintStream.class, printStream);
 
-        CanvasPrinter canvasPrinter = new CanvasPrinterImpl(System.out);
-        MessagePrinter messagePrinter = new MessagePrinterImpl(System.out);
-        ErrorPrinter errorPrinter = new ErrorPrinterImpl(System.out);
+        CanvasPrinter canvasPrinter = new CanvasPrinterImpl(printStream);
+        MessagePrinter messagePrinter = new MessagePrinterImpl(printStream);
+        ErrorPrinter errorPrinter = new ErrorPrinterImpl(printStream);
         OutputService outputService = new OutputServiceImpl(messagePrinter, canvasPrinter, errorPrinter);
         this.beans.put(OutputService.class, outputService);
 
-        InputService inputService = new InputServiceImpl(System.in, System.out);
+        InputService inputService = new InputServiceImpl(System.in, printStream);
         this.beans.put(InputService.class, inputService);
 
 
